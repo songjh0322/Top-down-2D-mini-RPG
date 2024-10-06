@@ -6,6 +6,9 @@ public class PlayerAction : MonoBehaviour
 {
     float h;
     float v;
+    
+    bool isHorizonMove; //수평이동인지를 확인하는 플래그
+    Vector2 moveVec; //대각선 이동을 막기위한 벡터 변수
     public float speed = 5f;
     Rigidbody2D rigid;
 
@@ -18,10 +21,28 @@ public class PlayerAction : MonoBehaviour
     {
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
+
+        if (h != 0 && v == 0) //수평이동할때
+        {
+            isHorizonMove = true;
+        }
+        else if (v != 0 && h == 0) //수직이동할때
+        {
+            isHorizonMove = false;
+        }
+
     }
     private void FixedUpdate()
     {
-        rigid.velocity = new Vector2(h * speed, v * speed);
+        if (isHorizonMove)
+        {
+            moveVec = new Vector2(h, 0);
+        }
+        else
+        {
+            moveVec = new Vector2(0, v);
+        }
+        rigid.velocity = moveVec * speed;
     }
 
     //Soil 타일맵에 들어가면 이동속도가 느려지는 함수
