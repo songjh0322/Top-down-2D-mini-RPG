@@ -32,8 +32,17 @@ public class PlayerAction : MonoBehaviour
         {
             isHorizonMove = false;
         }
-        anim.SetInteger("hAxisRaw", (int)h);
-        anim.SetInteger("vAxisRaw", (int)v);
+        // 애니메이션 상태 변경 감지 및 업데이트
+        if (anim.GetInteger("hAxisRaw") != (int)h || anim.GetInteger("vAxisRaw") != (int)v)
+        {
+            anim.SetBool("isChange", true);
+            anim.SetInteger("hAxisRaw", (int)h);
+            anim.SetInteger("vAxisRaw", (int)v);
+        }
+        else
+        {
+            anim.SetBool("isChange", false);
+        }
         
 
     }
