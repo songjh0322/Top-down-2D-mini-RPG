@@ -6,15 +6,17 @@ public class PlayerAction : MonoBehaviour
 {
     float h;
     float v;
-    
+
     bool isHorizonMove; //수평이동인지를 확인하는 플래그
     Vector2 moveVec; //대각선 이동을 막기위한 벡터 변수
     public float speed = 5f;
     Rigidbody2D rigid;
+    Animator anim;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -30,6 +32,9 @@ public class PlayerAction : MonoBehaviour
         {
             isHorizonMove = false;
         }
+        anim.SetInteger("hAxisRaw", (int)h);
+        anim.SetInteger("vAxisRaw", (int)v);
+        
 
     }
     private void FixedUpdate()
