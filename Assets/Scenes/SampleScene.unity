@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 180613428}
   - component: {fileID: 180613427}
   - component: {fileID: 180613430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NPC(A)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5931,7 +5931,7 @@ GameObject:
   - component: {fileID: 1986095429}
   - component: {fileID: 1986095431}
   - component: {fileID: 1986095432}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NPB(B)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

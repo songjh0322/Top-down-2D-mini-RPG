@@ -12,7 +12,9 @@ public class PlayerAction : MonoBehaviour
     public float speed = 5f;
     Vector2 dirVec; //Ray를 쏘기위한 변수
     Rigidbody2D rigid;
+    RaycastHit2D rayHit;
     Animator anim;
+    GameObject scanObject;
 
     private void Awake()
     {
@@ -61,6 +63,9 @@ public class PlayerAction : MonoBehaviour
         else if (h == -1)
         { dirVec = Vector2.left; }
 
+        if (Input.GetButtonDown("Jump") && scanObject != null)
+        { Debug.Log("This is " + scanObject.name); }
+
 
     }
     private void FixedUpdate()
@@ -77,6 +82,12 @@ public class PlayerAction : MonoBehaviour
 
         //Ray
         Debug.DrawRay(rigid.position, dirVec * 0.7f, new Color(0, 1, 0));
+        rayHit = Physics2D.Raycast(rigid.position, dirVec, 0.7f, LayerMask.GetMask("Object"));
+
+        if (rayHit.collider != null)
+        { scanObject = rayHit.collider.gameObject; }
+        else
+        { scanObject = null; }
     }
 
     //Soil 타일맵에 들어가면 이동속도가 느려지는 함수
