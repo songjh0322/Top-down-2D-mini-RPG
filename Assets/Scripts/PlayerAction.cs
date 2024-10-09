@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
@@ -7,6 +8,7 @@ public class PlayerAction : MonoBehaviour
     float h;
     float v;
 
+    public GameManager gameManager;
     bool isHorizonMove; //수평이동인지를 확인하는 플래그
     Vector2 moveVec; //대각선 이동을 막기위한 벡터 변수
     public float speed = 5f;
@@ -24,8 +26,8 @@ public class PlayerAction : MonoBehaviour
 
     private void Update()
     {
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
+        h = gameManager.isAction ? 0 : Input.GetAxisRaw("Horizontal");
+        v = gameManager.isAction ? 0 : Input.GetAxisRaw("Vertical");
 
 
 
@@ -64,7 +66,7 @@ public class PlayerAction : MonoBehaviour
         { dirVec = Vector2.left; }
 
         if (Input.GetButtonDown("Jump") && scanObject != null)
-        { Debug.Log("This is " + scanObject.name); }
+        { gameManager.Action(scanObject); }
 
 
     }
